@@ -30,9 +30,7 @@ The directory `results/MC_data_1e7/` contains chunked outputs corresponding to
 approximately `10^7` annihilation events. This dataset is **not committed to git**
 due to size.
 
-**How to obtain it:** TODO (choose one)
-- Option A (recommended for paper): download from an external archive (Zenodo / institutional storage) and unpack into `results/MC_data_1e7/`.
-- Option B: clone with Git LFS enabled (see below).
+**How to obtain it:** TODO
 
 ## Installation
 
