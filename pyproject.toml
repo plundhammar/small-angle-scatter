@@ -1,0 +1,28 @@
+[project]
+name = "small_angle_scattering"
+version = "1.0.0"
+description = ""
+authors = [{ name = "Per Lundhammar" }]
+requires-python = ">=3.12"
+dependencies = [
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "ipykernel",
+  "jupyter",
+  "matplotlib",
+  "tqdm",
+  "beautifulsoup4",
+  "pyarrow",
+  "fastparquet"
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
