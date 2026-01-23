@@ -50,7 +50,7 @@ pip install -e .
 ## Reproducing the figures
 The finalized figures are stored in `results/figures/` (pdf and svg). The notebooks in `notebooks/` reproduce these figures from the Feather tables.
 
-1. Ensure data exist in `results/MC_data_1e7/` for exact figures in publication or your own MC-data produced via the `run_MC.ipynb` notebook (explaineed below).
+1. Ensure data exist in `results/MC_data_1e7/` for exact figures in article draft or your own MC-data produced via the `run_MC.ipynb` notebook (explaineed below).
 2. Run the relevant notebooks with the path set to your data in the `MC_DATA_FOLDER` paramter:
     - `notebooks/d_distribution.ipynb`
     - `notebooks/energy_spectra.ipynb`
