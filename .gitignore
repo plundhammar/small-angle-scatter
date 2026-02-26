@@ -19,4 +19,5 @@ venv/
 # ---- Large / generated data (IGNORE) ----
 results/MC_data/
 results/MC_data_1e7/
+results/MC_data_1e7.zip
 

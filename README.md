@@ -47,7 +47,7 @@ from sas_pet.simulate import SimulationConfig, run_annihilations
 cfg = SimulationConfig(
     cylinder_radius_cm=10.0,
     cylinder_half_len_cm=15.0,
-    rng_seed=1234,
+    rng_seed=42,
 )
 
 photons, lors = run_annihilations(
@@ -71,8 +71,8 @@ Each manuscript figure corresponds to one notebook:
 
 ### Large dataset (10^7 annihilations)
 The full simulation outputs used to generate the manuscript figures are not stored in git.
-- Dataset (MC outputs): DOI: 10.5281/zenodo.XXXXXXX  
-- Software (this repository): DOI: 10.5281/zenodo.YYYYYYY
+- Dataset (MC outputs): DOI: 10.5281/zenodo.18788484 
+- Software (this repository): DOI: 10.5281/zenodo.18787917
 To reproduce the manuscript figures exactly, download the dataset and place it at:
 ```
 results/MC_data_1e7/
@@ -80,7 +80,7 @@ results/MC_data_1e7/
     R10/
     R15/
 ```
-
+You can also produce the exact data sets by running the simulation code (v1.0.0) with random seed 42 (see minimal example above).
 ### Citation
 If you use this software, please cite:
 
