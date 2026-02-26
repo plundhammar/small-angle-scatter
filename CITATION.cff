@@ -8,5 +8,5 @@ authors:
 version: "1.0.0"
 date-released: 2026-02-01
 license: MIT
-doi: 10.5281/zenodo.XXXXXXX
-repository-code: "https://github.com/plundhammar/small_angle_scatter"
+doi: 10.5281/zenodo.18787917.
+repository-code: "https://github.com/plundhammar/small-angle-scatter"

@@ -82,11 +82,14 @@ results/MC_data_1e7/
 ```
 
 ### Citation
-If you use this code or reproduce results, please cite:
+If you use this software, please cite:
 
-Lundhammar, P. (2026). Quantifying sensitivity gains from selective inclusion of small-angle scattered coincidences in PET.
+Lundhammar, P. (2026).
+*Quantifying Sensitivity Gains from Selective Inclusion of Small-Angle Scattered Coincidences in PET*.
+Zenodo. https://doi.org/10.5281/zenodo.18787917
 
-The software DOI is provided via Zenodo.
+The exact version used in the manuscript corresponds to:
+v1.0.0 — https://doi.org/10.5281/zenodo.18787918
 
 ### Licence
 This project is licensed under the MIT License (see LICENCE.md).
