@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "Quantifying Sensitivity Gains from Selective Inclusion of Small-Angle Scattered Coincidences in PET"
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Lundhammar"
+    given-names: "Per"
+    affiliation: "KTH Royal Institute of Technology"
+version: "1.0.0"
+date-released: 2026-02-01
+license: MIT
+doi: 10.5281/zenodo.XXXXXXX
+repository-code: "https://github.com/plundhammar/small_angle_scatter"

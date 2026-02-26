@@ -1,61 +1,92 @@
-# Small-Angle Scatter Retention in PET
-This repository contains Monte Carlo (MC) simulation code and analysis workflows used to study small-angle Compton scatter retention for PET-like back-to-back 511 keV photons in a water-cylinder phantom. The main outputs are  
+# Quantifying Sensitivity Gains from Selective Inclusion of Small-Angle Scattered Coincidences in PET
 
-1. photon and LOR-level event tables and 
-2. figures quantifying the trade-off between recovered coincidences (sensitivity gain) and spatial displacement (FWHM of LOR distance-to-source).
+This repository contains the Monte Carlo simulation framework and analysis code used to investigate the trade-off between sensitivity and spatial resolution when selectively retaining small-angle Compton-scattered coincidences in PET.
 
-## Repository layout
+The work quantifies how lowering the energy threshold increases the number of accepted lines of response (LORs) while introducing controlled spatial broadening.
+
+### Repository structure
 ```
-├── data/
-│ └── xcomH2O.tsv # NIST XCOM attenuation data for water
-├── src/MC/
-│ └── water_cylinder.py # MC transport model
-├── notebooks/ # Notebooks for MC simulation and figures
-├── results/
-│ ├── figures/ # The resulting figures
-│ ├── MC_data/ # Example dataset
-│ └── MC_data_1e7/ # Large dataset (~10^7 annihilations) (not tracked in git)
-├── pyproject.toml # Python project + dependencies (uv compatible)
-└── uv.lock # For reproducability
+data/
+    xcomH2O.tsv # NIST XCOM attenuation data for water
+notebooks/
+    01_run_simulation.ipynb
+    02_fig_energy_exit_spectra.ipynb
+    03_fig_lor_displacement_distributions.ipynb
+    04_fig_gain_vs_fwhm.ipynb
+    05_table_simulation_summary.ipynb
+src/sas_pet/
+    simulation, transport, geometry, physics models
+    analysis modules (fwhm_gain, fates, etc.)
+results/
+    figures/ # All manuscript figures
+    MC_data/ # Example datasets
+    MC_data_1e7/ # Large dataset (not tracked in git)
 ```
+### Scope
 
-## Data
-Two main table types are produced and stored as Apache Feather files:
-- `photons_*.feather`: per-photon records (e.g., exit energy, scatter counts, etc.)
-- `lors_*.feather`: per-coincidence/LOR records (e.g., LOR distance-to-source)
-Phantom sizes are encoded in filenames via `R5`, `R10`, and `R15` (cm).
+The simulation models:
+- Back-to-back 511 keV annihilation photons
+- Compton scattering in a cylindrical water phantom
+- Ideal cylindrical detector ring
+- Energy-based coincidence selection
+- Spatial displacement distributions (perpendicular and axial)
+- FWHM vs sensitivity gain trade-off curves
 
-### Large dataset (10^7 annihilations)
-The directory `results/MC_data_1e7/` contains chunked outputs corresponding to
-approximately `10^7` annihilation events. This dataset is **not committed to git**
-due to size.
-
-**How to obtain it:** TODO
-
-## Installation
-
-### Using uv (recommended)
-This repo is compatible with `uv`:
-
-```bash
-uv sync
-```
-### Using pip
+### Installation
+__Using pip__
 ```
 python -m venv venv
 source venv/bin/activate
 pip install -e .
 ```
 
-## Reproducing the figures
-The finalized figures are stored in `results/figures/` (pdf and svg). The notebooks in `notebooks/` reproduce these figures from the Feather tables.
+### Minimal example
+```python
+from sas_pet.simulate import SimulationConfig, run_annihilations
 
-1. Ensure data exist in `results/MC_data_1e7/` for exact figures in article draft or your own MC-data produced via the `run_MC.ipynb` notebook (explaineed below).
-2. Run the relevant notebooks with the path set to your data in the `MC_DATA_FOLDER` paramter:
-    - `notebooks/d_distribution.ipynb`
-    - `notebooks/energy_spectra.ipynb`
-    - `notebooks/gain_vs_fwhm.ipynb`
-    - `notebooks/table_of_simulation_results.ipynb`
+cfg = SimulationConfig(
+    cylinder_radius_cm=10.0,
+    cylinder_half_len_cm=15.0,
+    rng_seed=1234,
+)
 
-## Running the Monte Carlo
-The MC main methods is implemented in `src/MC/water_cylinder.py`. A ready to run notebook is provided in `notebooks/run_MC.ipynb` and will produce MC-data to the folder `data/MC_data`.
+photons, lors = run_annihilations(
+    10000,
+    cfg=cfg,
+    xcom_path="data/xcomH2O.tsv",
+)
+```
+
+### Running simulations
+Full-scale simulations used in the manuscript are stored as chunked Feather files in `results/MC_data_1e7/R{5,10,15}/`
+
+### Reproducing figures
+Each manuscript figure corresponds to one notebook:
+| Notebook                                    | Figure                      | Figure number |
+| ------------------------------------------- | --------------------------- | ------------- |
+| 02_fig_energy_exit_spectra.ipynb            | Exit energy spectra         | 1 |
+| 03_fig_lor_displacement_distributions.ipynb | LOR displacement histograms | 2 |
+| 04_fig_gain_vs_fwhm.ipynb                   | FWHM vs sensitivity gain    | 3 |
+| 05_table_simulation_summary.ipynb           | Simulation summary tables   | 4 |
+
+### Large dataset (10^7 annihilations)
+The full simulation outputs used to generate the manuscript figures are not stored in git.
+- Dataset (MC outputs): DOI: 10.5281/zenodo.XXXXXXX  
+- Software (this repository): DOI: 10.5281/zenodo.YYYYYYY
+To reproduce the manuscript figures exactly, download the dataset and place it at:
+```
+results/MC_data_1e7/
+    R5/
+    R10/
+    R15/
+```
+
+### Citation
+If you use this code or reproduce results, please cite:
+
+Lundhammar, P. (2026). Quantifying sensitivity gains from selective inclusion of small-angle scattered coincidences in PET.
+
+The software DOI is provided via Zenodo.
+
+### Licence
+This project is licensed under the MIT License (see LICENCE.md).
