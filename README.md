@@ -57,9 +57,6 @@ photons, lors = run_annihilations(
 )
 ```
 
-### Running simulations
-Full-scale simulations used in the manuscript are stored as chunked Feather files in `results/MC_data_1e7/R{5,10,15}/`
-
 ### Reproducing figures
 Each manuscript figure corresponds to one notebook:
 | Notebook                                    | Figure                      | Figure number |
@@ -69,18 +66,26 @@ Each manuscript figure corresponds to one notebook:
 | 04_fig_gain_vs_fwhm.ipynb                   | FWHM vs sensitivity gain    | 3 |
 | 05_table_simulation_summary.ipynb           | Simulation summary tables   | 4 |
 
-### Large dataset (10^7 annihilations)
-The full simulation outputs used to generate the manuscript figures are not stored in git.
-- Dataset (MC outputs): DOI: 10.5281/zenodo.18788484 
-- Software (this repository): DOI: 10.5281/zenodo.18787917
-To reproduce the manuscript figures exactly, download the dataset and place it at:
+### Large dataset (10^7 annihilations per radius)
+The full Monte Carlo outputs used to generate the manuscript figures are archived separately:
+- Dataset (Monte Carlo outputs): https://doi.org/10.5281/zenodo.18788484  
+- Software (source code): https://doi.org/10.5281/zenodo.18787917  
+Each radius (R = 5, 10, 15 cm) contains 10^7 annihilation events (2 × 10^7 photons). To reproduce the manuscript figures exactly, download the dataset and extract it to:
 ```
 results/MC_data_1e7/
     R5/
     R10/
     R15/
 ```
-You can also produce the exact data sets by running the simulation code (v1.0.0) with random seed 42 (see minimal example above).
+The archived dataset was generated using sas_pet v1.0.0 with deterministic pseudo-random number generation (seed = 42).
+
+### Reproducibility
+- Python ≥ 3.12
+- Dependencies specified in `pyproject.toml`
+- Locked dependency versions in `uv.lock`
+- Deterministic random seed (seed = 42)
+- All figures generated programmatically from archived data
+
 ### Citation
 If you use this software, please cite:
 
@@ -92,4 +97,5 @@ The exact version used in the manuscript corresponds to:
 v1.0.0 — https://doi.org/10.5281/zenodo.18787918
 
 ### Licence
-This project is licensed under the MIT License (see LICENCE.md).
+This project is licensed under the MIT License (see LICENCE).
+
